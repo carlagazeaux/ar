@@ -63,6 +63,7 @@
           <a-asset-item id="lunettes" src="glasses.glb"></a-asset-item>
           <a-asset-item id="cup" src="cup.glb"></a-asset-item>
           <a-asset-item id="epee" src="epee.glb"></a-asset-item>
+          <a-asset-item id="longuevue" src="longuevue.glb"></a-asset-item>
         </a-assets>
         <a-entity gltf-model="#clef"
               isfound scale="0.1 0.1 0.1"
@@ -72,8 +73,8 @@
         </a-entity>
         <a-entity gltf-model="#lunettes"
               isfound scale="0.05 0.05 0.05"
-              position="-1 -0.50 -2" rotation="0 45 0"
-              animation__position="startEvents: found; property: position; to: -1 0.2 -2; easing: easeOutQuad; dur: 1000; loop: 1;"
+              position="-1.3 -0.50 -2" rotation="0 45 0"
+              animation__position="startEvents: found; property: position; to: -1.3 0.2 -2; easing: easeOutQuad; dur: 1000; loop: 1;"
               shadow>
         </a-entity>
         <a-entity gltf-model="#cup"
@@ -86,6 +87,12 @@
               isfound scale="0.3 0.3 0.3"
               position="0.4 -0.50 -4" rotation="90 45 0"
               animation__position="startEvents: found; property: position; to: 0.4 0.2 -5; easing: easeOutQuad; dur: 1000; loop: 1;"
+              shadow>
+        </a-entity>
+        <a-entity gltf-model="#longuevue"
+              isfound scale="0.2 0.2 0.2"
+              position="1 -0.50 -3.8" rotation="90 45 0"
+              animation__position="startEvents: found; property: position; to: 1 0.2 -3.8; easing: easeOutQuad; dur: 1000; loop: 1;"
               shadow>
         </a-entity>
 
