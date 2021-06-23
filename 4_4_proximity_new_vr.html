@@ -1,0 +1,80 @@
+<!-- https://aframe.io/docs/1.0.0/core/utils.html#aframe-utils-throttletick-function-t-dt-minimuminterval-optionalcontext -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script>
+        var logging = true;
+
+        var interval = 1000;
+        var limit = 1;
+        var livepos = { x: 0, z: 0, };
+        var cubefound = false;
+
+        AFRAME.registerComponent('livecam', {
+            init: function () {
+                this.tick = AFRAME.utils.throttleTick(this.tick, interval, this);
+            },
+            tick: function (time, delta) {
+                //console.log("TIME " + delta);
+                livepos = {
+                    x: this.el.object3D.position.x.toFixed(2),
+                    z: this.el.object3D.position.z.toFixed(2)
+                }
+                if(logging) {
+                    var trace = document.querySelector('#trace');
+                    trace.setAttribute('value', livepos.x+"_"+livepos.z);
+                }
+            }
+        });
+        AFRAME.registerComponent('isfound', {
+            init: function () {
+                this.tick = AFRAME.utils.throttleTick(this.tick, interval, this);
+            },
+            tick: function (time, delta) {
+                //console.log("TIME " + delta);
+                var pos = {
+                    x: this.el.object3D.position.x.toFixed(2),
+                    z: this.el.object3D.position.z.toFixed(2)
+                }
+                var dist = Math.sqrt(Math.pow(pos.x - livepos.x, 2) + Math.pow(pos.z - livepos.z, 2));
+                //console.log(dist);
+                if(!cubefound){
+                    if(dist < limit){
+                        //console.log("trouvé");
+                        this.el.emit("found");
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <a-scene background="color: #5280A7">
+        <a-assets>
+          <a-asset-item id="obj" src="fusée.glb"></a-asset-item>
+        </a-assets>
+        <a-entity gltf-model="#obj"
+              isfound scale="0.1 0.1 0.1"
+              position="-1 -0.50 -3" rotation="0 45 0"
+              animation__position="startEvents: found; property: position; to: -1 0.4 -3; easing: easeOutQuad; dur: 1000; loop: 1;"
+              shadow>
+        </a-entity>
+
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="6" height="6" color="silver" shadow></a-plane>
+
+        <a-entity livecam camera look-controls wasd-controls position="0 1.6 0">
+            <a-text id="trace" value="position" position="0 0 -1" scale="0.5 0.5 0.5" align="center" color="silver"></a-text>
+        </a-entity>
+
+    </a-scene>
+</body>
+
+</html>
