@@ -59,15 +59,28 @@
 <body>
     <a-scene background="color: #5280A7">
         <a-assets>
-          <a-asset-item id="obj" src="fusée.glb"></a-asset-item>
+          <a-asset-item id="clef" src="clef.glb"></a-asset-item>
+          <a-asset-item id="lunettes" src="glasses.glb"></a-asset-item>
+          <a-asset-item id="cup" src="cup.glb"></a-asset-item>
         </a-assets>
-        <a-entity gltf-model="#obj"
+        <a-entity gltf-model="#clef"
               isfound scale="0.1 0.1 0.1"
               position="-1 -0.50 -3" rotation="0 45 0"
               animation__position="startEvents: found; property: position; to: -1 0.4 -3; easing: easeOutQuad; dur: 1000; loop: 1;"
               shadow>
         </a-entity>
-
+        <a-entity gltf-model="#lunettes"
+              isfound scale="0.05 0.05 0.05"
+              position="-1 -0.50 -2" rotation="0 45 0"
+              animation__position="startEvents: found; property: position; to: -1 0.2 -2; easing: easeOutQuad; dur: 1000; loop: 1;"
+              shadow>
+        </a-entity>
+        <a-entity gltf-model="#cup"
+              isfound scale="0.15 0.15 0.15"
+              position="1 -0.50 -2" rotation="0 45 0"
+              animation__position="startEvents: found; property: position; to: 1 0.2 -2; easing: easeOutQuad; dur: 1000; loop: 1;"
+              shadow>
+        </a-entity>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="6" height="6" color="silver" shadow></a-plane>
 
         <a-entity livecam camera look-controls wasd-controls position="0 1.6 0">
